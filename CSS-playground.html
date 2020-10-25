@@ -1,0 +1,242 @@
+<!DOCTYPE html <html dir="ltr" lang="en-US">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<head>
+  <title>CSS-playground</title>
+  <meta name="viewport" content="width=device-width">
+  <link rel=icon href=data:,>
+  <script language="JavaScript">
+    var old_style_node = null;
+    function applyStyle() {
+      var head = document.head || document.getElementsByTagName('head')[0];
+      var new_style_node = document.createElement('style');
+      new_style_node.type = 'text/css';
+      var css = document.getElementById("styleInput").value;
+      new_style_node.appendChild(document.createTextNode(css));
+      if (old_style_node) {
+        head.replaceChild(new_style_node, old_style_node);
+      } else {
+        head.appendChild(new_style_node);
+      }
+      old_style_node = new_style_node;
+    }
+    function inputHandler(event) {
+      if (event.which == 13 && event.ctrlKey) {
+        applyStyle();
+      }
+    }
+    window.addEventListener('load', function () {
+      document.getElementById('styleInput').addEventListener("keydown", inputHandler);
+      applyStyle();
+    });
+  </script>
+  <style>
+  </style>
+</head>
+<body>
+  <div id="css-pane">
+    <textarea id="styleInput" style="height:100%;width:100%;">
+/* press CTRL + RETURN to apply this CSS to the content on the right */
+
+/* resets */
+html, body, div, main {
+  padding: 0px;
+  margin: 0px;
+}
+
+/* simulate different screen widths, toggle outlines */
+:root {
+  --device-width: 1000px;
+  --outline-alpha: 0.0;
+}
+
+#css-pane {
+  position: fixed;
+  width: 40%;
+  height: auto;
+  top: 0;
+  bottom: 0;
+}
+
+#css-pane textarea {
+  border: none;
+  resize: none;
+}
+
+#html-pane {
+  position: absolute;
+  width: 60%;
+  left: 40%;
+  padding: 0px;
+  margin: 0px;
+}
+
+#html-pane {
+  border-left: 1px solid #888;
+  margin-left: -1px;
+}
+
+/* to keep things simple, only change styles for main and within */
+main {
+  width: 42rem;
+  max-width: var(--device-width);
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+  font-family: Arial;
+}
+
+main * {
+  outline: 1px solid rgb(255,0,0,var(--outline-alpha));
+}
+
+main header {
+  margin-bottom: 1.5rem;
+}
+
+main h1 {
+  margin-bottom: .5rem;
+}
+
+main time {
+  color: #888;
+}
+
+main pre {
+  white-space: pre-wrap;
+}
+
+main a {
+  color: #f42b03;
+  text-decoration: none;
+  outline: 0;
+}
+
+main a:hover {
+  text-decoration: underline;
+}
+    </textarea>
+  </div>
+  <div id="html-pane" contenteditable="true">
+    <main>
+      <article>
+        <header>
+          <h1>Good to have you here!</h1>
+          <time datetime="2020-10-25">Oct 25, 2020</time>
+        </header>
+        <p>This site contains the HTML elements I commonly use and some fill-text
+          to keep things together. I use this to test CSS styles. On the
+          left-hand side, you should see a textarea where you can influence 
+          the CSS (=styling) of all of this. What you just read is a paragraph
+          of text and the HTML tag for a paragraph is <code>p</code>.
+          The make 'p' look like code, i used the <code>code</code> tag.
+        </p>
+        <p>Note that I'm not a frontend-pro and should probably read something like
+          <a contenteditable="false" href="https://github.com/necolas/idiomatic-html">Principles of writing consistent, idiomatic HTML</a>
+          somewhen.
+        </p>
+        <p>The text you are currently reading has <code>contenteditable</code>
+          activated. This means that you should be able to edit it. Just place
+          your cursor somewhere and type something to give it a try.
+        </p>
+        <p>
+          There are good and common alterative ways to play around with CSS.
+          For example, modern browsers allow you to edit CSS directly within the 
+          developer tools. Furthermore, plane and simple local HTML/CSS files 
+          will also do the trick. I like this very approach because it 
+          integrates everything in a single HTML file that I can put somewhere
+          online to have a prototyping environment everywhere I have a browser.
+          When I edit the CSS or HTML content, I can locally save my edits 
+          just I would save any browser content (in Firefox, just press 
+          <kbd>Ctrl</kbd> + <kbd>S</kbd> and select "Web Page, complete").
+        </p>
+        <p>The rest of this page contains bogus text, don't bother to read it.</p>
+        <h2>Guess what, this is a h2.</h2>
+        <p>I have never understood why there are so many headings in HTML.
+          Anyhow, there are more important things. For example: lists. 
+          One has to know that there are two kinds of lists, ordered and 
+          unordered ones.
+        </p>
+        <ul>
+          <li>I feel so unordered.</li>
+          <li>That's because you are.</li>
+        </ul>
+        <p>The former one was unordered, the one to follow is ordered.</p>
+        <ol>
+          <li>Sometimes, I just feel to ordered.</li>
+          <li>Same here.</li>
+          <li>And here.</li>
+        </ol>
+        <p>
+          That's about it, isn't it? You can write <b>bold</b> or <i>italic</i> 
+          but everybody knows that. There are also spans,
+          <span>and</span>
+          <span>this</span>
+          <span>subsentence</span>
+          <span>consits</span>
+          <span>of</span>
+          <span>them.</span>
+        </p>
+        <p>
+          Things get more interesting with other components, for example: 
+          buttons.
+        </p>
+        <button>Please click me!</button>
+        <p>
+          Can you see it? A nice, little button that begs for your attention.
+          Buttons are often heavily styled.
+        </p>
+        <p>
+          Besides buttons, input boxes are common (think search boxes, password
+          inputs, formulars, and so forth).
+        </p>
+        <input type="text" value="Enter your weight here (just kidding).">
+        <p>
+          There is a multitude of variants for inputs. Two other important
+          components are checkboxes and radio boxes.
+        </p>
+        <input type="checkbox">Input Checkbox</input>
+        <p>The former is typically used in conjunction with the label tag.</p>
+        <input type="radio" name="checkboxGroup">I love classic music and hate everthing else</input>
+        <input type="radio" name="checkboxGroup">I hate classic masic and love everything else</input>
+        <p>When radio boxes share the same name, they can only be selected
+          in a mutually exclusive fashion, just like it should be.
+        </p>
+        <p>After all of this, lets take a little break. We'll do that with a
+          <code>hr</code>, a horizontal line.
+        </p>
+        <hr>
+        <p>
+          One more thing... the good old table.
+        </p>
+        <table>
+          <tr>
+            <td>Name</td>
+            <td>Type</td>
+            <td>Value</td>
+          </tr>
+          <tr>
+            <td>x</td>
+            <td>Variable</td>
+            <td>10</td>
+          </tr>
+          <tr>
+            <td>pi</td>
+            <td>Constant</td>
+            <td>3.14</td>
+          </tr>
+        </table>
+        <p>
+          That's it. Edit the CSS to tinker with the style or edit the text to,
+          well, edit the text.
+        </p>
+        <h2>What else?</h2>
+        <ul>
+          <li>I only tested this with Firefox.</li>
+          <li>I got some inspiration from <a contenteditable="false" href="https://jrl.ninja/etc/1/">58 bytes of css to look great nearly everywhere</a>.</li>
+        </ul>
+      </article>
+    </main>
+  </div>
+</body>
+</html>
